@@ -5,4 +5,6 @@ module ni.edu.uam.pae_eventos_javafx_equipo {
 
     opens ni.edu.uam.pae_eventos_javafx_equipo to javafx.fxml;
     exports ni.edu.uam.pae_eventos_javafx_equipo;
+    exports ni.edu.uam.pae_eventos_javafx_equipo.application;
+    opens ni.edu.uam.pae_eventos_javafx_equipo.application to javafx.fxml;
 }
