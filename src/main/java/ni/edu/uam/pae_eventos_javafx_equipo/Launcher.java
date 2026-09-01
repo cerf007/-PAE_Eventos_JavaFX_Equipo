@@ -5,6 +5,6 @@ import ni.edu.uam.pae_eventos_javafx_equipo.application.MenuApplication;
 
 public class Launcher {
     public static void main(String[] args) {
-        Application.launch(MenuApplication.class, args);
+        Application.launch(MenuApplication.class,args);
     }
 }
