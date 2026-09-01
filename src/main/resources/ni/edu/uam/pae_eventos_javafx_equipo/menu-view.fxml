@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="CONTROLLER_NAME"
-            prefHeight="400.0" prefWidth="600.0">
+<?xml version="1.0" encoding="UTF-8"?>
 
-</AnchorPane>
+
+<VBox spacing="15" alignment="CENTER" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ni.edu.uam.pae_eventos_javafx_equipo.controller.MenuController"
+      style="-fx-padding: 30;">
+
+    <Button text="Reto 1: Inventario de pulpería" onAction="#irInventario" prefWidth="220"/>
+    <Button text="Reto 2: Recepción de café" onAction="#irRecepcion" prefWidth="220"/>
+    <Button text="Reto 3: Tienda de artesanías" onAction="#irArtesania" prefWidth="220"/>
+
+</VBox>
