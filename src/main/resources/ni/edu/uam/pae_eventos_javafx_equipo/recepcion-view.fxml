@@ -21,7 +21,10 @@
          <TextField fx:id="txtCantidad" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       </GridPane>
 
-      <Button text="Registrar Entrega" onAction="#guardarLote" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 20; -fx-background-radius: 5;" />
+      <HBox spacing="10" alignment="CENTER">
+         <Button text="Registrar Entrega" onAction="#guardarLote" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 15; -fx-background-radius: 5;" />
+         <Button text="Volver al Menú" onAction="#volverAlMenu" style="-fx-background-color: #757575; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 15; -fx-background-radius: 5;" />
+      </HBox>
 
       <Label fx:id="lblMensaje" wrapText="true" textAlignment="CENTER" />
    </VBox>

@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
 <VBox spacing="10" xmlns:fx="http://javafx.com/fxml"
       fx:controller="ni.edu.uam.pae_eventos_javafx_equipo.controller.ArtesaniaController">
 
