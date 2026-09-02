@@ -6,13 +6,9 @@ import ni.edu.uam.pae_eventos_javafx_equipo.Navegador;
 
 import java.io.IOException;
 
-public class TiendaArtesaniaApplication extends Application {
+public class LoteApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Navegador.cambiarVentana(stage, "artesania-view.fxml", "Reto 3: Tienda de Artesanías");
-    }
-
-    public static void main(String[] args) {
-        launch(args);
+        Navegador.cambiarVentana(stage, "recepcion-view.fxml", "Cooperativa Agro - Registro de Lotes");
     }
 }

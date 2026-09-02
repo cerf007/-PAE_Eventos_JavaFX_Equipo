@@ -1,20 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
+<HBox fx:id="rootPane" prefHeight="550.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.pae_eventos_javafx_equipo.controller.LoteController">
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="295.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label text="Recepción de cafe">
-         <font>
-            <Font name="Gabriola" size="35.0" />
-         </font>
-         <VBox.margin>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </VBox.margin>
-      </Label>
-   </children>
-</VBox>
+   <VBox prefWidth="350" spacing="20" style="-fx-background-color: #E8F5E9; -fx-padding: 30;" alignment="TOP_CENTER">
+      <Label text="Nuevo Lote" style="-fx-font-size: 24px; -fx-text-fill: #2E7D32; -fx-font-weight: bold;" />
+
+      <GridPane vgap="15" hgap="10">
+         <Label text="Código:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+         <TextField fx:id="txtCodigo" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+         <Label text="Productor:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+         <TextField fx:id="txtProductor" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+         <Label text="Producto:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+         <ComboBox fx:id="cbProducto" prefWidth="180" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+         <Label text="Cantidad (QQ):" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+         <TextField fx:id="txtCantidad" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      </GridPane>
+
+      <HBox spacing="10" alignment="CENTER">
+         <Button text="Registrar Entrega" onAction="#guardarLote" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 15; -fx-background-radius: 5;" />
+         <Button text="Volver al Menú" onAction="#volverAlMenu" style="-fx-background-color: #757575; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 15; -fx-background-radius: 5;" />
+      </HBox>
+
+      <Label fx:id="lblMensaje" wrapText="true" textAlignment="CENTER" />
+   </VBox>
+
+   <VBox HBox.hgrow="ALWAYS" spacing="15" style="-fx-background-color: #FFFFFF; -fx-padding: 30;">
+      <Label text="Historial de Entregas" style="-fx-font-size: 22px; -fx-text-fill: #333333; -fx-font-weight: bold;" />
+
+      <TableView fx:id="tablaLotes" VBox.vgrow="ALWAYS">
+         <columns>
+            <TableColumn fx:id="colCodigo" prefWidth="100" text="Código" />
+            <TableColumn fx:id="colProductor" prefWidth="200" text="Productor" />
+            <TableColumn fx:id="colProducto" prefWidth="150" text="Producto" />
+            <TableColumn fx:id="colCantidad" prefWidth="100" text="Cantidad" />
+         </columns>
+      </TableView>
+      <Label text=" Doble clic en una fila para ver detalles. Clic derecho para opciones." style="-fx-text-fill: #757575; -fx-font-size: 12px;" />
+   </VBox>
+</HBox>
