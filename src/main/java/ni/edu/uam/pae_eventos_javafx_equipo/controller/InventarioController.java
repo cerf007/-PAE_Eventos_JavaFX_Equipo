@@ -96,7 +96,7 @@ public class InventarioController {
                 resultadoUnico.add(encontrado);
                 tableInventario.setItems(resultadoUnico);
             } else {
-                tableInventario.setItems(resultadoUnico); // Vacía la tabla
+                tableInventario.setItems(resultadoUnico);
                 mostrarAlerta(Alert.AlertType.WARNING, "Sin resultados", "No se encontró ningún producto con el código: " + codigoBuscado);
             }
         }
