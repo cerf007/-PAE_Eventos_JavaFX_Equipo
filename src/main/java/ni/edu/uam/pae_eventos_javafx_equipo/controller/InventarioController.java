@@ -1,13 +1,9 @@
 package ni.edu.uam.pae_eventos_javafx_equipo.controller;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -18,8 +14,8 @@ import ni.edu.uam.pae_eventos_javafx_equipo.models.Inventario;
 import java.io.IOException;
 
 public class InventarioController {
-    @FXML
-    private TextField txtCodigo;
+
+    @FXML private TextField txtCodigo;
     @FXML private TextField txtNombre;
     @FXML private TextField txtPrecio;
     @FXML private TextField txtCantidad;
@@ -31,7 +27,7 @@ public class InventarioController {
     @FXML private TableColumn<Inventario, Double> colPrecio;
     @FXML private TableColumn<Inventario, Integer> colCantidad;
 
-    private InventarioDAO inventarioDAO = new InventarioDAO();
+    private final InventarioDAO inventarioDAO = new InventarioDAO();
 
     @FXML
     public void initialize() {
@@ -50,54 +46,52 @@ public class InventarioController {
         String precioStr = txtPrecio.getText().trim();
         String cantidadStr = txtCantidad.getText().trim();
 
+        // Validar campos vacíos
         if (codigo.isEmpty() || nombre.isEmpty() || precioStr.isEmpty() || cantidadStr.isEmpty()) {
-            mostrarAlerta(Alert.AlertType.WARNING, "Campos vacíos", "Por favor, complete todos los campos.");
+            mostrarAlerta(Alert.AlertType.WARNING, "Campos Vacíos", "Todos los campos son obligatorios.");
             return;
         }
 
+        // Validar formato numérico y valores positivos
         try {
             double precio = Double.parseDouble(precioStr);
             int cantidad = Integer.parseInt(cantidadStr);
 
             if (precio < 0 || cantidad < 0) {
-                mostrarAlerta(Alert.AlertType.ERROR, "Valor inválido", "El precio y la cantidad no pueden ser negativos.");
+                mostrarAlerta(Alert.AlertType.WARNING, "Valores Inválidos", "El precio y la cantidad no pueden ser negativos.");
                 return;
             }
 
-            if (inventarioDAO.buscarPorCodigo(codigo) != null) {
-                mostrarAlerta(Alert.AlertType.ERROR, "Código duplicado", "Ya existe un producto registrado con este código.");
-                return;
-            }
+            Inventario nuevoProducto = new Inventario(codigo, nombre, precio, cantidad);
+            inventarioDAO.agregar(nuevoProducto);
 
-            Inventario nuevo = new Inventario(codigo, nombre, precio, cantidad);
-            inventarioDAO.agregar(nuevo);
             actualizarTabla();
             limpiarCampos();
-
-            mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Producto guardado correctamente.");
+            mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Producto registrado correctamente.");
 
         } catch (NumberFormatException e) {
-            mostrarAlerta(Alert.AlertType.ERROR, "Error de formato", "El precio debe ser numérico y la cantidad un número entero.");
+            mostrarAlerta(Alert.AlertType.ERROR, "Formato Incorrecto", "El precio debe ser un número (decimal) y la cantidad un entero.");
         }
     }
 
     @FXML
     private void buscarProducto(KeyEvent event) {
+        // Detectar si la tecla presionada fue ENTER
         if (event.getCode() == KeyCode.ENTER) {
-            String codigoBuscado = txtBuscar.getText().trim();
-            if (codigoBuscado.isEmpty()) {
+            String codigoBusqueda = txtBuscar.getText().trim();
+
+            if (codigoBusqueda.isEmpty()) {
                 actualizarTabla();
                 return;
             }
 
-            Inventario encontrado = inventarioDAO.buscarPorCodigo(codigoBuscado);
-            ObservableList<Inventario> resultadoUnico = FXCollections.observableArrayList();
+            Inventario encontrado = inventarioDAO.buscarPorCodigo(codigoBusqueda);
+
             if (encontrado != null) {
-                resultadoUnico.add(encontrado);
-                tableInventario.setItems(resultadoUnico);
+                tableInventario.setItems(FXCollections.observableArrayList(encontrado));
             } else {
-                tableInventario.setItems(resultadoUnico); // Vacía la tabla
-                mostrarAlerta(Alert.AlertType.WARNING, "Sin resultados", "No se encontró ningún producto con el código: " + codigoBuscado);
+                mostrarAlerta(Alert.AlertType.WARNING, "No Encontrado", "No se encontró ningún producto con el código: " + codigoBusqueda);
+                actualizarTabla();
             }
         }
     }
@@ -112,8 +106,7 @@ public class InventarioController {
     }
 
     private void actualizarTabla() {
-        ObservableList<Inventario> lista = FXCollections.observableArrayList(inventarioDAO.obtenerRegistros());
-        tableInventario.setItems(lista);
+        tableInventario.setItems(FXCollections.observableArrayList(inventarioDAO.obtenerRegistros()));
     }
 
     private void limpiarCampos() {
@@ -121,14 +114,13 @@ public class InventarioController {
         txtNombre.clear();
         txtPrecio.clear();
         txtCantidad.clear();
-        txtBuscar.clear();
     }
 
-    private void mostrarAlerta(Alert.AlertType type, String title, String message) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
+    private void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensaje) {
+        Alert alert = new Alert(tipo);
+        alert.setTitle(titulo);
         alert.setHeaderText(null);
-        alert.setContentText(message);
+        alert.setContentText(mensaje);
         alert.showAndWait();
     }
 }

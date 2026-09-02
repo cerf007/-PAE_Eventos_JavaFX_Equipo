@@ -7,6 +7,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
+import ni.edu.uam.pae_eventos_javafx_equipo.Navegador;
 import ni.edu.uam.pae_eventos_javafx_equipo.dao.LoteDAO;
 import ni.edu.uam.pae_eventos_javafx_equipo.models.Lote;
 
@@ -85,6 +86,15 @@ public class LoteController {
         } catch (Exception e) {
             lblMensaje.setStyle("-fx-text-fill: red;");
             lblMensaje.setText(e.getMessage());
+        }
+    }
+
+    @FXML
+    private void volverAlMenu(javafx.event.ActionEvent event) {
+        try {
+            Navegador.cambiarVentana(event, "menu-view.fxml", "Menú Principal");
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
         }
     }
 

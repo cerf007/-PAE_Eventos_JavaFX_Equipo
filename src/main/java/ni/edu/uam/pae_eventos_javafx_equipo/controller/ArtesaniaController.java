@@ -39,7 +39,7 @@ public class ArtesaniaController {
         colCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
 
         colImagen.setCellValueFactory(cellData -> {
-            String path = cellData.getValue().getImagePath();
+            String path = cellData.getValue().getImagenPath();
             ImageView imageView = new ImageView();
             try {
                 if (path != null && !path.isEmpty()) {
